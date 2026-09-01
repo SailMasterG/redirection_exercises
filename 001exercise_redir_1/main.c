@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chguerre <chguerre@student.lausanne.ch>    +#+  +:+       +#+        */
+/*   By: chguerr <chguerr@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/01 08:01:43 by chguerre          #+#    #+#             */
-/*   Updated: 2026/09/01 08:38:27 by chguerre         ###   ########.fr       */
+/*   Created: 2026/09/01 18:26:03 by chguerr           #+#    #+#             */
+/*   Updated: 2026/09/01 18:26:53 by chguerr          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ int main()
 	pid_t pid;
 	char *cmd[] = {"ls", NULL};
 	char **envp = NULL;
-	
-	fd = open("sample.txt", O_WRONLY| O_CREAT| O_TRUNC , 0644);
-	if(fd < 0)
-		return(1);
-
 	pid = fork();
 	if( pid == 0)
 	{
+		fd = open("sample.txt", O_WRONLY| O_CREAT| O_TRUNC , 0644);
+		if(fd < 0)
+		return(1);
 
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
@@ -38,7 +36,6 @@ int main()
 		perror(cmd[0]);
 		exit(127);
 	}
-	close(fd);
 	wait(NULL);
 	return (0);
 }

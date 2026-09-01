@@ -1,5 +1,0 @@
-Makefile
-main.c
-main.o
-myapp
-sample.txt
