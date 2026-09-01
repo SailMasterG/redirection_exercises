@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chguerr <chguerr@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 01/09/2026 19:24:48 by chguerr           #+#    #+#             */
-/*   Updated: 01/09/2026 19:24:48 by chguerr          ###   ########.ch       */
+/*   Created: 2026/09/01 20:01:35 by chguerr           #+#    #+#             */
+/*   Updated: 2026/09/01 20:01:35 by chguerr          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int main(int argc, char **argv, char **envp)
 	pid = fork();
 	if(pid == 0)
 	{
-		fd= open("append_txt.txt", O_WRONLY | O_CREAT | O_APPEND , 0644);
+		fd= open("append.txt", O_WRONLY | O_CREAT | O_APPEND , 0644);
 		if(fd < 0)
 		{
 			perror("No se pudo abrir el archivo");
