@@ -6,7 +6,7 @@
 /*   By: chguerr <chguerr@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 20:00:54 by chguerr           #+#    #+#             */
-/*   Updated: 2026/09/01 20:21:14 by chguerr          ###   ########.ch       */
+/*   Updated: 2026/09/01 20:24:46 by chguerr          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ int main(int argc, char **argv, char **envp)
 		perror(" cat ");
 		exit(127);
 	}
+	code = 0;
 	wait(&status);
-	if (WIFEXITED(status))          // ¿terminó llamando a exit()?
-{
-    code = WEXITSTATUS(status); // sí -> acá está el código real (42, en la prueba)
-}
+	if (WIFEXITED(status))
+    	code = WEXITSTATUS(status);
 	return (code);
 }
