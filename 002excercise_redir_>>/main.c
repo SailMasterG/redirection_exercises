@@ -6,7 +6,7 @@
 /*   By: chguerr <chguerr@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 20:01:35 by chguerr           #+#    #+#             */
-/*   Updated: 2026/09/01 20:01:35 by chguerr          ###   ########.ch       */
+/*   Updated: 2026/09/01 20:08:00 by chguerr          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,4 @@ int main(int argc, char **argv, char **envp)
 	}
 	wait(NULL);
 	return (0);
-}
+}W
