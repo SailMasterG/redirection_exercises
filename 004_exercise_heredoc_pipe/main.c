@@ -6,7 +6,7 @@
 /*   By: chguerre <chguerre@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 20:00:54 by chguerr           #+#    #+#             */
-/*   Updated: 2026/09/02 22:10:24 by chguerre         ###   ########.fr       */
+/*   Updated: 2026/09/02 22:24:02 by chguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int main (int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 	pipe(fd);
+
 	pid1 = fork();
 	if(pid1 == 0)
 	{
