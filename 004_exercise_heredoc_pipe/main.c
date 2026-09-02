@@ -6,56 +6,59 @@
 /*   By: chguerre <chguerre@student.lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 20:00:54 by chguerr           #+#    #+#             */
-/*   Updated: 2026/09/02 15:42:48 by chguerre         ###   ########.fr       */
+/*   Updated: 2026/09/02 20:49:15 by chguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/wait.h>
 #include <errno.h>
-#include <fcntl.h>
 #include <string.h>
 
-int main(int argc, char **argv, char **envp)
+
+int main (int argc, char *argv[], char **envp)
 {
-	int fd;
-	int fd2;
-	pid_t pid;
-	int status;
-	int code = 0;
-	char str[] = "Hola, espero que estes bien.\nMis vacaciones van genial.\nLastima tengo que volver al trabajo manana.";
+	int fd[2];
+	pid_t pid1;
+	pid_t pid2;
+	int state;
+	int code;
+	char str[] = "Esta es una linea muy larga\n  Esta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\n ";
 	
 	(void)argc;
 	(void)argv;
-	
-	fd = open("temp.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if(fd < 0)
+	pipe(fd);
+	pid1 = fork();
+	pid2 = fork();
+	if(pid1 == 0)
 	{
-		perror("Error:-->");
-		exit(1);
+		close(fd[0]);
+		write(fd[1], &str, strlen(str));
+		close(fd[1]);
+		exit(0);
 	}
-	write(fd, &str, strlen(str));
-	
-	fd2 = open("temp.txt", O_RDONLY);
-	unlink("temp.txt");
-	dup2(fd2, STDIN_FILENO);
-	
-	close(fd);
-	close(fd2);
-	pid = fork();
-	if(pid == 0)
+	if(pid2 == 0)
 	{
-
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[1]);
+		close(fd[0]);
 		execve("/usr/bin/cat", (char *[]){"cat", NULL}, envp);
-		perror("Error:");
+		perror("Error ");
 		exit(127);
 	}
-	wait(&status);
-	if(WIFEXITED(status))
+
+	close(fd[0]);
+	close(fd[1]);
+	waitpid(pid1,&state, 0);
+	waitpid(pid2,&state, 0);
+
+	if(WIFEXITED(state))
 	{
-		code = WEXITSTATUS(status);
+		code = WEXITSTATUS(state);
 	}
+	
+	
 	return (code);
 }
