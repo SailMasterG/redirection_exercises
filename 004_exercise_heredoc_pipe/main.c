@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chguerre <chguerre@student.lausanne.ch>    +#+  +:+       +#+        */
+/*   By: chguerre <chguerre@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 20:00:54 by chguerr           #+#    #+#             */
-/*   Updated: 2026/09/02 20:49:15 by chguerre         ###   ########.fr       */
+/*   Updated: 2026/09/02 22:10:24 by chguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ int main (int argc, char *argv[], char **envp)
 	pid_t pid2;
 	int state;
 	int code;
-	char str[] = "Esta es una linea muy larga\n  Esta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\nEsta es una linea muy larga\n Esta es una linea muy larga\n ";
-	
+	char str[] = "1Esta es una linea muy larga\n  2Esta es una linea muy larga\n 3Esta es una linea muy larga\n4Esta es una linea muy larga\n 5Esta es una linea muy larga\n6Esta es una l inea muy larga\n 7Esta es una linea muy larga\n8Esta es una linea muy larga\n 9Esta es una linea muy larga\n10Esta es una linea muy larga\n 11Esta es una linea muy larga\n12Esta es una linea muy larga\n 13Esta es una linea muy larga\n14Esta es una linea muy larga\n 15Esta es una linea muy larga\n16Esta es una linea muy larga\n";
+
 	(void)argc;
 	(void)argv;
 	pipe(fd);
 	pid1 = fork();
-	pid2 = fork();
 	if(pid1 == 0)
 	{
 		close(fd[0]);
@@ -39,6 +38,7 @@ int main (int argc, char *argv[], char **envp)
 		close(fd[1]);
 		exit(0);
 	}
+	pid2 = fork();
 	if(pid2 == 0)
 	{
 		dup2(fd[0], STDIN_FILENO);
@@ -58,7 +58,7 @@ int main (int argc, char *argv[], char **envp)
 	{
 		code = WEXITSTATUS(state);
 	}
-	
-	
+
+
 	return (code);
 }
